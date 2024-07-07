@@ -1,4 +1,2 @@
 streamlit
-PIL
-numpy
 tensorflow==2.15
