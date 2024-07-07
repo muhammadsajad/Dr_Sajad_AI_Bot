@@ -3,6 +3,9 @@ from PIL import Image, ImageOps
 import numpy as np
 import tensorflow as tf
 
+# Config function
+st.set_page_config(page_title='Dr Sajad AI Bot')
+
 
 @st.cache_resource
 def load_model():
