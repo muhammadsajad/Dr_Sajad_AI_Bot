@@ -6,6 +6,15 @@ import tensorflow as tf
 # Config function
 st.set_page_config(page_title='Dr Sajad AI Bot')
 
+# Hiding the header and footer
+hide_menu_style="""
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_menu_style, unsafe_allow_html=True)
+
 
 @st.cache_resource
 def load_model():
