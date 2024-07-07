@@ -1,11 +1,7 @@
 import streamlit as st
-
 from PIL import Image, ImageOps
 import numpy as np
-
 import tensorflow as tf
-
-
 
 
 @st.cache_resource
@@ -18,7 +14,7 @@ with st.spinner('Model is being loaded..'):
     model = load_model()
 
 st.write("""
-         # Periapical  Xrays Classification
+         # Periapical  Xray Classification
          """
          )
 
@@ -31,8 +27,7 @@ def import_and_predict(image_data, model):
     size = (256, 256)
     image = ImageOps.fit(image_data, size, Image.BILINEAR)
     image = np.asarray(image)
-    # img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    # img_resize = (cv2.resize(img, dsize=(75, 75),    interpolation=cv2.INTER_CUBIC))/255.
+  
 
     # Ensure the image is grayscale
     if image.ndim == 2:  # Image is grayscale
