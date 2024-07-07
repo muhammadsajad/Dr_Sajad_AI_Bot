@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 
 # Config function
-st.set_page_config(page_title='Dr Sajad AI Bot')
+st.set_page_config(page_title='Dr Sajad AI Bot', page_icon=None, layout='centered', initial_sidebar_state='auto')
 
 # Hiding the header and footer
 hide_menu_style="""
