@@ -4,6 +4,21 @@ import numpy as np
 import tensorflow as tf
 import google.generativeai as genai
 
+# Config function
+st.set_page_config(page_title='Dr Sajad AI Bot', page_icon=None, layout='centered', initial_sidebar_state='auto')
+
+# Hiding the header and footer
+hide_menu_style="""
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_menu_style, unsafe_allow_html=True)
+
+api_key=st.secrets["GOOGLE_API_KEY"]
+genai.configure(api_key=api_key)
+
 # Define background images for different pages
 background_images = {
     "Home": "https://img.freepik.com/free-photo/portrait-concentrated-male-doctor-dressed-uniform_171337-1495.jpg?w=900&t=st=1720435979~exp=1720436579~hmac=0a617a10f4dee02cc0080558c56a10d54bf984b2d57f2ad96b3e087c048f5465",
