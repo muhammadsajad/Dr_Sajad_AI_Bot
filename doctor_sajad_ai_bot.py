@@ -170,62 +170,62 @@ elif selected_page == "Radiologist":
     st.markdown('<div class="custom-header-radiologist"><h1>Periapical X-ray Radiologist</h1></div>',
                 unsafe_allow_html=True)
 
-    # # Function for loading Trained Model
-    # @st.cache_resource
-    # def load_model():
-    #     model = tf.keras.models.load_model(r'model.h5')
-    #     return model
+    # Function for loading Trained Model
+    @st.cache_resource
+    def load_model():
+        model = tf.keras.models.load_model(r'model.h5')
+        return model
 
 
-    # with st.spinner('Model is being loaded..'):
-    #     model = load_model()
+    with st.spinner('Model is being loaded..'):
+        model = load_model()
 
-    # st.markdown('<p class="uploader-text">Upload your Periapical X-ray (JPG/PNG only)</p>', unsafe_allow_html=True)
-    # file = st.file_uploader("", type=["jpg", "png"])
+    st.markdown('<p class="uploader-text">Upload your Periapical X-ray (JPG/PNG only)</p>', unsafe_allow_html=True)
+    file = st.file_uploader("", type=["jpg", "png"])
 
-    # st.set_option('deprecation.showfileUploaderEncoding', False)
+    st.set_option('deprecation.showfileUploaderEncoding', False)
 
-    # # Function for converting image to 3D and reshaping for model input
-    # def import_and_predict(image_data, model):
-    #     size = (256, 256)
-    #     image = ImageOps.fit(image_data, size, Image.BILINEAR)
-    #     image = np.asarray(image)
-
-
-    #     # Ensure the image is grayscale
-    #     if image.ndim == 2:  # Image is grayscale
-    #         # Convert grayscale to RGB by duplicating the single channel
-    #         image = np.stack((image,) * 3, axis=-1)
-    #     elif image.shape[2] == 1:  # Image has a single channel
-    #         # Convert single channel to RGB
-    #         image = np.concatenate([image] * 3, axis=-1)
-
-    #     # Normalize the image
-    #     image = image / 255.0
-
-    #     img_reshape = image[np.newaxis, ...]
-
-    #     prediction = model.predict(img_reshape)
-
-    #     return prediction
+    # Function for converting image to 3D and reshaping for model input
+    def import_and_predict(image_data, model):
+        size = (256, 256)
+        image = ImageOps.fit(image_data, size, Image.BILINEAR)
+        image = np.asarray(image)
 
 
-    # if file is None:
-    #     st.text("")
-    # else:
+        # Ensure the image is grayscale
+        if image.ndim == 2:  # Image is grayscale
+            # Convert grayscale to RGB by duplicating the single channel
+            image = np.stack((image,) * 3, axis=-1)
+        elif image.shape[2] == 1:  # Image has a single channel
+            # Convert single channel to RGB
+            image = np.concatenate([image] * 3, axis=-1)
 
-    #     image = Image.open(file)
-    #     st.image(image, width=300)
+        # Normalize the image
+        image = image / 255.0
 
-    #     predictions = import_and_predict(image, model)
+        img_reshape = image[np.newaxis, ...]
 
-    #     class_names = ['Primary Endo with Secondary Perio', 'Primary Endodontic Lesion',
-    #                    'Primary Perio with Secondary Endo', 'Primary Periodontal Lesion', 'True Combined Lesions']
+        prediction = model.predict(img_reshape)
 
-    #     # Determine the detected class
-    #     detected_class = class_names[np.argmax(predictions)]
+        return prediction
 
-    #     st.markdown(f'<p class="custom-text">The Lesion detected is :  {detected_class}</p>', unsafe_allow_html=True)
+
+    if file is None:
+        st.text("")
+    else:
+
+        image = Image.open(file)
+        st.image(image, width=300)
+
+        predictions = import_and_predict(image, model)
+
+        class_names = ['Primary Endo with Secondary Perio', 'Primary Endodontic Lesion',
+                       'Primary Perio with Secondary Endo', 'Primary Periodontal Lesion', 'True Combined Lesions']
+
+        # Determine the detected class
+        detected_class = class_names[np.argmax(predictions)]
+
+        st.markdown(f'<p class="custom-text">The Lesion detected is :  {detected_class}</p>', unsafe_allow_html=True)
 
 
 # ------------------------------------- Doctor Sajad AI Bot Page --------------------------------------------------------------------------
