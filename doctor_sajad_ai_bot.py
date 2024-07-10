@@ -22,26 +22,29 @@ model_gene = genai.GenerativeModel('gemini-1.5-flash')
 
 # Define background images for different pages
 background_images = {
-    "Home": "https://img.freepik.com/free-photo/portrait-concentrated-male-doctor-dressed-uniform_171337-1495.jpg?w=900&t=st=1720435979~exp=1720436579~hmac=0a617a10f4dee02cc0080558c56a10d54bf984b2d57f2ad96b3e087c048f5465",
+    "Home": "https://img.freepik.com/free-photo/portrait-concentrated-male-doctor-dressed-uniform_171337-1495.jpg?t=st=1720552468~exp=1720556068~hmac=50b25d8ec3489929f625966412babaef901762d7b001f8798f965a248b6321cc&w=740",
+
     "Radiologist": "https://img.freepik.com/free-vector/abstract-medical-wallpaper-template-design_53876-61804.jpg?t=st=1720439409~exp=1720443009~hmac=88c927a6021f5e3134288a804a32fe7553c8871510372478a9af380087ba68d8&w=826",
-    "Contact": "https://img.freepik.com/free-photo/portrait-professional-doctor-holding-chest-x-ray-shot-looking-camera_1098-19302.jpg?w=740&t=st=1720436074~exp=1720436674~hmac=e9986f8e3f0c0c151f5e06dbf9ac5b306854aa3f542860642efdd87eed99878a",
+
+    "Doctor Sajad": "",
+# "   Doctor Sajad": "https://img.freepik.com/premium-photo/medical-background-empty-space_198067-687339.jpg?w=900"
 }
+
 
 #------------------ Inject CSS for background image and layout adjustments -------------------------------------
 st.markdown(
     """
     <style>
         [data-testid="stAppViewContainer"] {
-            background-size: cover;
+            background-size:cover;
             background-repeat: no-repeat;
-            background-attachment: fixed;
+            background-attachment: fixed
+            
         }
         [data-testid="stFileUploaderDropzone"] {
             border: 5px dashed #150E0D ; /* Change border style */
-            # padding: 20px; /* Add padding inside the drop zone */
             border-radius: 20px; /* Optional: Rounded corners */
             background-color: #f9f9f9; /* Background color */
-            # text-align: center; /* Center-align content */
             margin-top: -50px; /* Adjust margin to reduce space above */
             font-weight: bold
             }
@@ -50,17 +53,18 @@ st.markdown(
         [data-testid="baseButton-secondary"]{
             font-weight:bold
             }
+            
+        
 
          [data-testid="stImage"] {
-            border: 5px solid #161212; /* Change border color to blue */
+            border: 5px solid #FFFFFF ; /* Change border color to blue */
             border-radius: 15px; /* Optional: Rounded corners */
-            padding: 3px; /* Add padding inside the border */
             background-color: #FFFFFF; /* Background color behind the image */
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow effect */
-            margin-left:200px;
+            margin-left:100px;
             margin-top:-20px
 
         }
+        
         [data-testid="stHeader"] {
             background: rgba(0, 0, 0, 0);
             height: 0px; /* Optional: Adjust the height if necessary */
@@ -71,20 +75,17 @@ st.markdown(
             font-weight: bold;
             color: #333;
             text-align:center;
-
             width: 52vw; /* Use full viewport width */
-           margin-bottom:-20px;
-
-           margin-top:-60px
-
+            margin-bottom:-20px;
+            margin-top:-60px
         }
 
         .custom-text {
-        color: #A02020; /* Change text color to blue */
-        font-size: 24px; /* Increase font size */
-        font-weight: bold; /* Make the text bold */
-        text-align: center; /* Center align the text */
-        margin: 20px 0; /* Add margin for spacing */
+            color: #A02020; /* Change text color to blue */
+            font-size: 24px; /* Increase font size */
+            font-weight: bold; /* Make the text bold */
+            text-align: center; /* Center align the text */
+            margin: 20px 0; /* Add margin for spacing */
         }
         .custom-header {
             background-color: rgba(0, 0, 0, 0); /* Optional: Add a semi-transparent overlay */
@@ -93,12 +94,29 @@ st.markdown(
             width: 60vw; /* Use full viewport width */
             color: white; /* Default text color */
             position: fixed;
-            top: 0;
+            top: 10px;
             
         }
         .custom-header h1 {
             color: #F4F3F3; /* Default text color */
         }
+        
+         .custom-header-Your {
+            
+            text-align: center;
+            width: 60vw; /* Use full viewport width */
+            color: white; /* Default text color */
+            position: fixed;
+            top: 67px;
+            
+        }
+        
+        .custom-header-Your h1 {
+            color: #F4F3F3; /* Default text color */
+            font-size: 29px; /* Adjust text size as needed */
+            font-style: italic; /* Make text italic */
+        }
+        
 
         .custom-header-radiologist {
             background-color: rgba(0, 0, 0, 0); /* Optional: Add a semi-transparent overlay */
@@ -106,12 +124,9 @@ st.markdown(
             text-align: center;
             width: 55vw; /* Use full viewport width */
             color: white; /* Default text color */
-            # position: fixed;
             margin-bottom:-70px;
             margin-Top:-130px;
             top: 0;
-
-            z-index: 1000;
         }
         .custom-header-radiologist h1 {
             color: #150E0D; /* Default text color */
@@ -123,26 +138,41 @@ st.markdown(
             text-align: center;
             width: 55vw; /* Use full viewport width */
             color: white; /* Default text color */
-            # position: fixed;
             margin-bottom:-70px;
             margin-Top:-130px;
             top: 0;
-
-            z-index: 1000;
         }
         .custom-header-doctor h1 {
             color: #150E0D; /* Default text color */
         }
+        
+        
+        .custom-header-dr-sajad-aiBot {
+            background-color: rgba(0, 0, 0, 0); /* Optional: Add a semi-transparent overlay */
+            text-align: center;
+            width: 55vw; /* Use full viewport width */
+            margin-top:100px;
+            margin-left:-220px;
+
+        }
+        
+        .custom-header-dr-sajad-aiBot h2 {
+            color: #150E0D; /* Default text color */
+
+        }
+        
         .stApp {
             padding-top: 50px; /* Adjust based on your custom header height */
-        }
+           }
+        
+         
     </style>
     """,
     unsafe_allow_html=True,
 )
 
 # Sidebar selection for page
-selected_page = st.sidebar.radio("Select Page", ["Home", "Radiologist", "Contact"])
+selected_page = st.sidebar.radio("Select Page", ["Home", "Radiologist", "Doctor Sajad"])
 
 # Conditional background image and header rendering based on selected page
 if selected_page in background_images:
@@ -161,7 +191,9 @@ if selected_page in background_images:
 
 # -------------------------------------------- Home Page -------------------------------------------------
 if selected_page == "Home":
-    st.markdown('<div class="custom-header"><h1>ToothLens: X-Ray Diagnosis & Treatment</h1></div>', unsafe_allow_html=True)
+    st.markdown('<div class="custom-header"><h1>MediBot: AI Health Companion</h1></div>', unsafe_allow_html=True)
+    st.write("")
+    st.markdown('<div class="custom-header-Your"><h1>Your Digital Doctor at Hand</h1></div>', unsafe_allow_html=True)
 
 
 
@@ -229,8 +261,8 @@ elif selected_page == "Radiologist":
 
 
 # ------------------------------------- Doctor Sajad AI Bot Page --------------------------------------------------------------------------
-elif selected_page == "Contact":
-    st.markdown('<div class="custom-header-doctor"><h1>Doctor Sajad</h1></div>', unsafe_allow_html=True)
+elif selected_page == "Doctor Sajad":
+    st.markdown("<div class='custom-header-doctor'><h1>Doctor Sajad's Virtual Clinic</h1></div>", unsafe_allow_html=True)
 
 
     persona = """
@@ -305,14 +337,35 @@ elif selected_page == "Contact":
                    - 0.12% solution, twice daily for 2 weeks.
                  - **Follow-up:** Regular periodontal maintenance and monitoring of endodontic healing.
 
-            If someone wants an appointment, they can contact me via email: muhammad_sajad47@yahoo.com.
+            If someone wants an appointment, they can contact me via email: muhammad_sajad47@yahoo.com or also via contact number:+923422526458.
+            
+            
+            Muhammad's Website: https://muhammadsajad.github.io/Muhammad_Sajad/
+            Muhammad's Email: muhammad_sajad47@yahoo.com
+            Muhammad's GitHub: https://github.com/muhammadsajad
+            Muhammad's LinkedIn: http://www.linkedin.com/in/muhammad-sajad
+            Muhammad's YouTube: https://youtube.com/@muhammadsajad2230?si=115QVamsGIKkxDaA
+            
             """
 
-    st.title(" Dotor Sajad's AI Bot")
-    st.write("")
-    # st.write("Ask anything about me")
-    user_question = st.text_input("Ask anything about me", placeholder="Type your question here")
-    if st.button("ASK", use_container_width=400):
+
+
+    
+    col1, col2 = st.columns([1, 2])  # Increase the width of the second column
+
+    with col1:
+        
+        st.markdown("<div class='custom-header-dr-sajad-aiBot'><h2>Doctor Sajad's AI Bot</h2></div>",
+                    unsafe_allow_html=True)
+
+
+
+    with col2:
+        st.image("drsajad.png", width=400)
+
+    user_question = st.text_input("Chat with Doctor Sajad here", placeholder="Type your question here")
+    if st.button("ASK", use_container_width=500):
         prompt = persona + " Here is the question that the user asked: " + user_question
         response = model_gene.generate_content(prompt)
+
         st.write(response.text)
