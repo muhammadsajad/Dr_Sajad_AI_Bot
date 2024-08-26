@@ -215,7 +215,7 @@ elif selected_page == "Radiologist":
     st.markdown('<p class="uploader-text">Upload your Periapical X-ray (JPG/PNG only)</p>', unsafe_allow_html=True)
     file = st.file_uploader("", type=["jpg", "png"])
 
-    st.set_option('deprecation.showfileUploaderEncoding', False)
+    # st.set_option('deprecation.showfileUploaderEncoding', False)
 
     # Function for converting image to 3D and reshaping for model input
     def import_and_predict(image_data, model):
