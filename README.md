@@ -1,4 +1,5 @@
-# MediBot: AI Health Companion
+# MediBot: AI Health Companion 
+ ### You can access this app free of cost by clicking on this: 🔗 https://drsajad.streamlit.app/
   ### Your Digital Doctor at Hand
 
 ## Overview
