@@ -18,7 +18,7 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 api_key=st.secrets["GOOGLE_API_KEY"]
 genai.configure(api_key="AIzaSyA6aNDVzSRlAEsVYLljaijVK7bAmzxDVJU")
-model_gene = genai.GenerativeModel('gemini-1.5-flash')
+model_gene = genai.GenerativeModel('gemini-2.5-flash')
 
 # Define background images for different pages
 background_images = {
